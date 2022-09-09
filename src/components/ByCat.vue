@@ -1,14 +1,10 @@
 <template>
   <div class="container">
     <header>
-      <form class="search">
-        <input class="form" type="text" v-model="search" name="search" placeholder="я ищу" />
-        <button class="btn" type="submit" @click="find()">Ищем</button>
-      </form>
-      <div class="menu">
-        <router-link to="/" >Все новости</router-link>
-        <router-link to="/popular" >Обсуждаемые темы</router-link>
+      <div class="back-cont">
+          <router-link class="back btn btn-primary" :to="main()">Назад</router-link>
       </div>
+    </header>
 
       <div v-for="item in news" :key="item.id">
         <div class="card">
@@ -20,13 +16,6 @@
           </div>
         </div>
       </div>
-
-      <div class="pages">
-        <button class="btn" v-if="first_page" @click="sendPage(-1)">Назад</button>
-        <div>Страница {{data.current_page}} из {{data.last_page}}</div>
-        <button class="btn" v-if="last_page" @click="sendPage(1)">Вперед</button>
-      </div>
-  </header>
   </div>
 </template>
 
@@ -34,13 +23,12 @@
 import { getSomething } from "../api/get";
 
 export default {
-  name: "Main",
+  name: "ByCat",
   data(){
     return {
       news: [],
       data:[],
       page: "",
-      search: "",
       
       showError: false,
       loading: false,
@@ -48,31 +36,23 @@ export default {
     };
   },
   created() {
-    getSomething(`api/v1/news`).then((resp) => {
-      this.news = resp.data.data;
+    getSomething(`api/v1/news/byCats/${this.$route.params.id}`).then((resp) => {
+      this.news = resp.data;
       this.data = resp.data;
       this.page = resp.data.current_page;
       this.loading = false;
     });
   },
   computed: {
-    first_page: function () {
-      if (this.data.current_page === 1) return false;
-      else return true;
-    },
-    last_page: function () {
-      if (this.data.current_page === this.data.last_page) return false;
-      else return true;
-    },
   },
   methods: {
     adOpen: function(id) {
         return `news/${id}`;
     },
-    find() {
-       this.$router.replace({ path: `/find/${this.search}` });
-       
-    },
+    main: function() {
+        return `/`;
+    }
+    
   },
 };
 </script>

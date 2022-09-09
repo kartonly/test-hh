@@ -7,6 +7,7 @@ import ByTag from "./components/ByTag";
 import Find from "./components/Find";
 import Login from "./components/Login";
 import Admin from "./components/Admin";
+import ByCat from "./components/ByCat";
 import VueRouter from 'vue-router'
 
 Vue.config.productionTip = false;
@@ -33,6 +34,10 @@ const routes = [
   {
     path: "/byTag/:id",
     component: ByTag,
+  },
+  {
+    path: "/byCat/:id",
+    component: ByCat,
   },
   {
     path: "/find/:search",

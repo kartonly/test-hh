@@ -20,7 +20,7 @@
       <h2>Категории</h2>
        <div class="card" v-for="item in cats" :key="item.id">
         <div class="card-header">
-          <router-link style="color:green" :to="open(item.id)">{{item.name}}</router-link>
+          <router-link style="color:green" :to="openCat(item.id)">{{item.name}}</router-link>
         </div>
       </div>
   </div>
@@ -56,7 +56,10 @@ export default {
     },
     main: function() {
         return `/`;
-    }
+    },
+    openCat: function(id) {
+        return `byCat/${id}`;
+    },
     
   },
 };

@@ -1,5 +1,7 @@
 # test-hh
 
+##Админка на /admin (открывать лучше в приватном окне)
+
 ## Project setup
 ```
 npm install
